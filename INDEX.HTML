@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fast Food Le Délice</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #e74c3c;
+            margin-bottom: 5px;
+            font-size: 1.8rem;
+        }
+        p.sub {
+            color: #777;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .category-title {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin: 20px 0 10px 0;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 5px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .info h3 {
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 3px;
+        }
+        .info p {
+            font-size: 0.8rem;
+            color: #888;
+        }
+        .right {
+            text-align: right;
+        }
+        .price {
+            display: block;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 6px;
+        }
+        .btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        /* Modal */
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 85%;
+            max-width: 300px;
+            text-align: left;
+        }
+        .modal-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: #2c3e50;
+        }
+        .modal-content label {
+            display: block;
+            font-size: 0.85rem;
+            color: #555;
+            margin-bottom: 4px;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .modal-content button {
+            width: 100%;
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 9px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close {
+            display: block;
+            text-align: center;
+            margin-top: 8px;
+            color: #888;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🍔 Fast Food Le Délice</h1>
+    <p class="sub">Commandez votre plat ou boisson en un clic</p>
+
+    <div class="container">
+        <!-- قسم المأكولات -->
+        <div class="category-title">🍽️ Plats & Sandwichs</div>
+
+        <div class="card">
+            <div class="info">
+                <h3>Tacos Géant</h3>
+                <p>Viande, escalope, sauce fromage</p>
+            </div>
+            <div class="right">
+                <span class="price">650 DA</span>
+                <button class="btn" onclick="openBox('Tacos Géant')">Commander</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="info">
+                <h3>Burger Deluxe</h3>
+                <p>Steak frais, cheddar, salade</p>
+            </div>
+            <div class="right">
+                <span class="price">500 DA</span>
+                <button class="btn" onclick="openBox('Burger Deluxe')">Commander</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="info">
+                <h3>Pizza Margherita</h3>
+                <p>Tomate, mozzarella, olives</p>
+            </div>
+            <div class="right">
+                <span class="price">600 DA</span>
+                <button class="btn" onclick="openBox('Pizza Margherita')">Commander</button>
+            </div>
+        </div>
+
+        <!-- قسم المشروبات -->
+        <div class="category-title">🥤 Boissons</div>
+
+        <div class="card">
+            <div class="info">
+                <h3>Coca-Cola (33cl)</h3>
+                <p>Fraîche</p>
+            </div>
+            <div class="right">
+                <span class="price">100 DA</span>
+                <button class="btn" onclick="openBox('Coca-Cola (33cl)')">Commander</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="info">
+                <h3>Jus de Fruits</h3>
+                <p>Tropical / ACE</p>
+            </div>
+            <div class="right">
+                <span class="price">150 DA</span>
+                <button class="btn" onclick="openBox('Jus de Fruits')">Commander</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Commander</h3>
+            <label>Téléphone :</label>
+            <input type="tel" id="phone" placeholder="05XXXXXXXX">
+            <label>Adresse :</label>
+            <input type="text" id="address" placeholder="Votre quartier / rue">
+            <button onclick="send()">Valider</button>
+            <span class="close" onclick="closeBox()">Annuler</span>
+        </div>
+    </div>
+
+    <script>
+        let currentItem = "";
+        function openBox(item) {
+            currentItem = item;
+            document.getElementById('modalTitle').innerText = "Commander : " + item;
+            document.getElementById('modal').style.display = 'flex';
+        }
+        function closeBox() {
+            document.getElementById('modal').style.display = 'none';
+            document.getElementById('phone').value = '';
+            document.getElementById('address').value = '';
+        }
+        function send() {
+            let p = document.getElementById('phone').value;
+            let a = document.getElementById('address').value;
+            if(!p || !a) {
+                alert("Veuillez remplir tous les champs !");
+                return;
+            }
+            alert("Commande validée pour " + currentItem + "! Nous vous contacterons sur le " + p);
+            closeBox();
+        }
+    </script>
+
+</body>
+</html>
+ 
